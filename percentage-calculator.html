@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Percentage Calculator - Free Tool</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ecc94b 0%, #d69e2e 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .calculator-box {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #d69e2e;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-weight: 500;
+        }
+        input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        input:focus {
+            outline: none;
+            border-color: #ecc94b;
+        }
+        .calc-type {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .calc-type button {
+            flex: 1;
+            background: #f7fafc;
+            color: #333;
+            border: 2px solid #e0e0e0;
+            padding: 0.8rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .calc-type button.active {
+            background: #ecc94b;
+            color: white;
+            border-color: #ecc94b;
+        }
+        button {
+            background: #ecc94b;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #d69e2e;
+        }
+        .result {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f7fafc;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .result .percentage {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #ecc94b;
+        }
+        .formula {
+            color: #666;
+            margin-top: 1rem;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to All Tools</a>
+        
+        <div class="calculator-box">
+            <h1>📈 Percentage Calculator</h1>
+            <p>Calculate percentages easily.</p>
+            
+            <div class="calc-type">
+                <button id="type1" class="active" onclick="setType(1)">What is % of ?</button>
+                <button id="type2" onclick="setType(2)">is what % of ?</button>
+            </div>
+            
+            <div id="calculator1">
+                <div class="input-group">
+                    <label for="percent">Percentage (%):</label>
+                    <input type="number" id="percent" min="0" max="100" step="0.1" value="20">
+                </div>
+                <div class="input-group">
+                    <label for="number">Number:</label>
+                    <input type="number" id="number" min="0" step="any" value="100">
+                </div>
+            </div>
+            
+            <div id="calculator2" style="display: none;">
+                <div class="input-group">
+                    <label for="part">Part:</label>
+                    <input type="number" id="part" min="0" step="any" value="20">
+                </div>
+                <div class="input-group">
+                    <label for="whole">Whole:</label>
+                    <input type="number" id="whole" min="0" step="any" value="100">
+                </div>
+            </div>
+            
+            <button onclick="calculatePercentage()">Calculate</button>
+            
+            <div class="result">
+                <div class="percentage" id="result">20</div>
+                <div class="formula" id="formula">20% of 100 = 20</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentType = 1;
+        
+        function setType(type) {
+            currentType = type;
+            document.getElementById('type1').classList.remove('active');
+            document.getElementById('type2').classList.remove('active');
+            document.getElementById(`type${type}`).classList.add('active');
+            
+            document.getElementById('calculator1').style.display = type === 1 ? 'block' : 'none';
+            document.getElementById('calculator2').style.display = type === 2 ? 'block' : 'none';
+            
+            calculatePercentage();
+        }
+        
+        function calculatePercentage() {
+            if (currentType === 1) {
+                const percent = parseFloat(document.getElementById('percent').value);
+                const number = parseFloat(document.getElementById('number').value);
+                
+                if (isNaN(percent) || isNaN(number)) {
+                    alert('Please enter valid numbers');
+                    return;
+                }
+                
+                const result = (percent / 100) * number;
+                document.getElementById('result').textContent = result.toFixed(2);
+                document.getElementById('formula').textContent = `${percent}% of ${number} = ${result.toFixed(2)}`;
+            } else {
+                const part = parseFloat(document.getElementById('part').value);
+                const whole = parseFloat(document.getElementById('whole').value);
+                
+                if (isNaN(part) || isNaN(whole) || whole === 0) {
+                    alert('Please enter valid numbers');
+                    return;
+                }
+                
+                const result = (part / whole) * 100;
+                document.getElementById('result').textContent = result.toFixed(1) + '%';
+                document.getElementById('formula').textContent = `${part} is ${result.toFixed(1)}% of ${whole}`;
+            }
+        }
+        
+        window.onload = () => calculatePercentage();
+    </script>
+</body>
+</html>

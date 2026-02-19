@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Tool Calculator</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 1rem;
+        }
+        .tool-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+        .tool-card h2 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+        .tool-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        .tool-card .hint {
+            color: #999;
+            font-size: 0.9rem;
+            border-top: 1px solid #eee;
+            padding-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Free Calculator Tools</h1>
+        <div class="tools-grid">
+            <!-- Grade Calculator Card -->
+            <a href="grade-calculator.html" class="tool-card">
+                <h2>📊 GRADE</h2>
+                <p>Free Grade Calculator for Teachers. Enter number of questions to see the scale.</p>
+                <div class="hint">Click to calculate grades →</div>
+            </a>
+
+            <!-- Tip Calculator Card -->
+            <a href="tip-calculator.html" class="tool-card">
+                <h2>💸 TIP</h2>
+                <p>Free Tip Calculator. Enter amount to calculate tip.</p>
+                <div class="hint">Click to calculate tip →</div>
+            </a>
+
+            <!-- Percentage Calculator Card -->
+            <a href="percentage-calculator.html" class="tool-card">
+                <h2>📈 PERCENTAGE</h2>
+                <p>Free Percentage Calculator. Enter a number to calculate percentage.</p>
+                <div class="hint">Click to calculate percentage →</div>
+            </a>
+
+            <!-- Loan Calculator Card -->
+            <a href="loan-calculator.html" class="tool-card">
+                <h2>🏦 LOAN</h2>
+                <p>Free Loan Calculator. Enter amount to calculate loan.</p>
+                <div class="hint">Click to calculate loan →</div>
+            </a>
+
+            <!-- Password Generator Card -->
+            <a href="password-generator.html" class="tool-card">
+                <h2>🔐 PASSWORD</h2>
+                <p>Generate Strong Password.</p>
+                <div class="hint">Click to generate password →</div>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

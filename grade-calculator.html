@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade Calculator - Free Tool</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .calculator-box {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-weight: 500;
+        }
+        input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #5a67d8;
+        }
+        .result {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f7fafc;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .result h3 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        .result .grade {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+        .result .letter-grade {
+            font-size: 2rem;
+            color: #48bb78;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to All Tools</a>
+        
+        <div class="calculator-box">
+            <h1>📊 Grade Calculator</h1>
+            <p>Enter the number of questions and wrong answers to calculate the grade.</p>
+            
+            <div class="input-group">
+                <label for="total">Total Questions:</label>
+                <input type="number" id="total" min="1" value="10">
+            </div>
+            
+            <div class="input-group">
+                <label for="wrong">Number Wrong:</label>
+                <input type="number" id="wrong" min="0" value="0">
+            </div>
+            
+            <button onclick="calculateGrade()">Calculate Grade</button>
+            
+            <div class="result" id="result">
+                <h3>Your Grade:</h3>
+                <div class="grade" id="percentage">0%</div>
+                <div class="letter-grade" id="letter">-</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calculateGrade() {
+            const total = parseInt(document.getElementById('total').value);
+            const wrong = parseInt(document.getElementById('wrong').value);
+            
+            if (total <= 0) {
+                alert('Please enter a valid number of questions');
+                return;
+            }
+            
+            if (wrong < 0 || wrong > total) {
+                alert('Please enter a valid number of wrong answers');
+                return;
+            }
+            
+            const correct = total - wrong;
+            const percentage = (correct / total) * 100;
+            
+            document.getElementById('percentage').textContent = percentage.toFixed(1) + '%';
+            
+            // Calculate letter grade
+            let letter = '';
+            if (percentage >= 90) letter = 'A';
+            else if (percentage >= 80) letter = 'B';
+            else if (percentage >= 70) letter = 'C';
+            else if (percentage >= 60) letter = 'D';
+            else letter = 'F';
+            
+            document.getElementById('letter').textContent = letter;
+        }
+        
+        // Calculate on page load
+        window.onload = calculateGrade;
+    </script>
+</body>
+</html>
